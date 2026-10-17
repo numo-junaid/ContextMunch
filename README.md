@@ -200,4 +200,4 @@ node test/test-server.js
 ---
 
 ## 📜 License
-MIT © ContextMunch Engineering Team
+MIT © ContextMunch
