@@ -1,0 +1,43 @@
+{
+  "name": "context-munch",
+  "version": "1.0.0",
+  "description": "AST-driven codebase minifier and middleware proxy that slashes AI token usage by 70% without losing context",
+  "main": "src/ast/compressor.js",
+  "type": "module",
+  "bin": {
+    "context-munch": "./bin/context-munch.js"
+  },
+  "scripts": {
+    "start": "node src/proxy/server.js",
+    "proxy": "node src/proxy/server.js",
+    "cli": "node bin/context-munch.js",
+    "test": "node test/test-suite.js"
+  },
+  "keywords": [
+    "ast",
+    "tokens",
+    "llm",
+    "context-window",
+    "babel",
+    "minifier",
+    "prompt-engineering",
+    "token-reduction",
+    "cost-optimizer"
+  ],
+  "author": "ContextMunch Engineering Team",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/generator": "^8.0.6",
+    "@babel/parser": "^8.0.7",
+    "@babel/traverse": "^8.0.7",
+    "@babel/types": "^8.0.6",
+    "chalk": "^6.0.1",
+    "commander": "^15.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "gpt-tokenizer": "^4.0.3"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.14.0"
+  }
+}

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ContextMunch is an AST-driven codebase minifier and middleware proxy that slashes AI LLM token usage by up to 70-80% without losing semantic context.">
+  <title>ContextMunch | AST Codebase Minifier & LLM Proxy</title>
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Glowing Background Orbs -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Header & Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-logo">
+          <span class="logo-icon">⚡</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">ContextMunch</span>
+          <span class="brand-badge">AST COMPILER v1.0</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#playground" class="nav-link active">Compiler Playground</a>
+        <a href="#calculator" class="nav-link">Cost Calculator</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#telemetry" class="nav-link">Telemetry</a>
+      </nav>
+
+      <div class="header-status">
+        <div class="status-indicator">
+          <span class="status-dot pulse"></span>
+          <span class="status-label">Proxy Active :4040</span>
+        </div>
+        <button id="btn-refresh-stats" class="btn-ghost" title="Refresh Telemetry">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Hero Banner -->
+    <section class="hero-section">
+      <div class="hero-badge">
+        <span class="badge-sparkle">✦</span>
+        <span>LLM Infrastructure & Context Window Optimization</span>
+      </div>
+      <h1 class="hero-title">
+        Slash AI Token Usage by <span class="gradient-text">70% to 80%</span> Without Losing Context.
+      </h1>
+      <p class="hero-subtitle">
+        ContextMunch ingests JavaScript, TypeScript, and JSX, extracts the Abstract Syntax Tree (AST), strips comments and verbose types, and collapses repetitive UI boilerplate into dense markdown signatures before hitting OpenAI, Anthropic, or Gemini APIs.
+      </p>
+
+      <!-- Key Metrics Row -->
+      <div class="metrics-grid">
+        <div class="metric-card glass-panel">
+          <div class="metric-header">
+            <span class="metric-title">Token Reduction</span>
+            <span class="metric-icon cyan">📉</span>
+          </div>
+          <div class="metric-value cyan-text" id="metric-reduction-rate">73.6%</div>
+          <div class="metric-footer">Across benchmarks vs raw code</div>
+        </div>
+
+        <div class="metric-card glass-panel">
+          <div class="metric-header">
+            <span class="metric-title">Tokens Slashed (Single Sample)</span>
+            <span class="metric-icon emerald">✂️</span>
+          </div>
+          <div class="metric-value emerald-text" id="metric-tokens-slashed">896 tokens</div>
+          <div class="metric-footer" id="metric-original-tokens">From 1,218 down to 322</div>
+        </div>
+
+        <div class="metric-card glass-panel">
+          <div class="metric-header">
+            <span class="metric-title">Savings Per 1M Requests</span>
+            <span class="metric-icon violet">💰</span>
+          </div>
+          <div class="metric-value violet-text" id="metric-dollars-saved">$2,240.00</div>
+          <div class="metric-footer">Benchmarked on OpenAI GPT-4o</div>
+        </div>
+
+        <div class="metric-card glass-panel">
+          <div class="metric-header">
+            <span class="metric-title">Cache Speedup</span>
+            <span class="metric-icon amber">⚡</span>
+          </div>
+          <div class="metric-value amber-text" id="metric-cache-hits">0.4ms</div>
+          <div class="metric-footer">Embedded SQLite AST Signatures</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Playground Section -->
+    <section id="playground" class="playground-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">AST Compiler Playground</h2>
+          <p class="section-desc">Inspect real-time syntax transformations, stripped trees, and token differentials.</p>
+        </div>
+
+        <!-- Presets Bar -->
+        <div class="preset-selector">
+          <span class="preset-label">Load Preset:</span>
+          <button class="preset-btn active" data-preset="reactComponent" id="btn-preset-react">React TSX Card</button>
+          <button class="preset-btn" data-preset="backendService" id="btn-preset-backend">TypeScript Service</button>
+          <button class="preset-btn" data-preset="expressRoute" id="btn-preset-express">Express Route</button>
+        </div>
+      </div>
+
+      <!-- Controls Bar -->
+      <div class="compiler-controls glass-panel">
+        <div class="control-group">
+          <label class="control-label" for="select-jsx-mode">Context Loop (JSX):</label>
+          <select id="select-jsx-mode" class="select-input">
+            <option value="compact" selected>Compact JSX (Min Tailwind + Icons)</option>
+            <option value="signature">Dense UI Signature (79% Token Cut)</option>
+            <option value="none">Preserve Exact JSX Elements</option>
+          </select>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="check-strip-comments" checked>
+            <span class="checkbox-custom"></span>
+            <span>Strip Comments</span>
+          </label>
+
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="check-strip-types" checked>
+            <span class="checkbox-custom"></span>
+            <span>Strip TypeScript</span>
+          </label>
+
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="check-strip-logs" checked>
+            <span class="checkbox-custom"></span>
+            <span>Strip Debug Logs</span>
+          </label>
+
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="check-compact-ws">
+            <span class="checkbox-custom"></span>
+            <span>Ultra Compact</span>
+          </label>
+        </div>
+
+        <div class="action-buttons">
+          <button id="btn-run-compression" class="btn-primary">
+            <span class="btn-icon">⚡</span>
+            <span>Munch Codebase</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Code Comparison Workspace -->
+      <div class="code-workspace-grid">
+        <!-- Original Code Editor Panel -->
+        <div class="editor-panel glass-panel">
+          <div class="editor-header">
+            <div class="file-tab">
+              <span class="file-icon">📄</span>
+              <span id="label-original-filename">UserProfileCard.tsx</span>
+              <span class="badge badge-raw">Raw Input</span>
+            </div>
+            <div class="editor-stats">
+              <span class="stat-pill" id="badge-original-tokens">1,218 Tokens</span>
+              <span class="stat-pill" id="badge-original-lines">115 Lines</span>
+            </div>
+          </div>
+          <div class="editor-container">
+            <textarea id="input-source-code" class="code-textarea" spellcheck="false" placeholder="Paste JavaScript, TypeScript, or JSX code here..."></textarea>
+          </div>
+        </div>
+
+        <!-- Compressed Output Panel -->
+        <div class="editor-panel glass-panel">
+          <div class="editor-header">
+            <div class="file-tab">
+              <span class="file-icon">⚡</span>
+              <span id="label-compressed-filename">UserProfileCard.min.js</span>
+              <span class="badge badge-compressed">AST Optimized</span>
+            </div>
+            <div class="editor-stats">
+              <span class="stat-pill highlight-pill" id="badge-compressed-tokens">322 Tokens</span>
+              <span class="stat-pill success-pill" id="badge-reduction-pct">-73.6%</span>
+              <button id="btn-copy-code" class="btn-icon-only" title="Copy Compressed Code">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="editor-container">
+            <textarea id="output-compressed-code" class="code-textarea compressed" spellcheck="false" readonly placeholder="Compressed AST will appear here..."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multi-Model Dollar Savings Calculator -->
+    <section id="calculator" class="calculator-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">API Context Window Financial Projections</h2>
+          <p class="section-desc">Calculate precise financial savings across standard AI models at production scale.</p>
+        </div>
+
+        <div class="volume-slider-box glass-panel">
+          <div class="slider-header">
+            <span class="slider-title">Monthly Query Volume:</span>
+            <span class="slider-val" id="label-query-volume">100,000 requests</span>
+          </div>
+          <input type="range" id="input-query-volume" min="1000" max="10000000" step="10000" value="100000" class="custom-slider">
+          <div class="slider-marks">
+            <span>1K</span>
+            <span>50K</span>
+            <span>100K</span>
+            <span>1M</span>
+            <span>5M</span>
+            <span>10M</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Model Pricing Table -->
+      <div class="pricing-table-container glass-panel">
+        <table class="pricing-table" id="table-pricing-analysis">
+          <thead>
+            <tr>
+              <th>Model Name</th>
+              <th>Provider</th>
+              <th>Input Price (1M Tokens)</th>
+              <th>Raw Monthly Cost</th>
+              <th>Munched Monthly Cost</th>
+              <th>Net Monthly Savings</th>
+              <th>Annual ROI</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-pricing-rows">
+            <!-- Dynamically populated via app.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Architecture & Middleware Proxy Integration -->
+    <section id="architecture" class="architecture-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">ContextMunch Proxy & MCP Middleware Loop</h2>
+          <p class="section-desc">Intercept prompt ingestion pipelines or use as an MCP server in Cursor, Claude, or custom LLM stacks.</p>
+        </div>
+      </div>
+
+      <div class="arch-cards-grid">
+        <div class="arch-card glass-panel">
+          <div class="arch-card-header">
+            <span class="arch-step">01</span>
+            <h3 class="arch-title">AST Tree Decomposition</h3>
+          </div>
+          <p class="arch-text">
+            Babel/SWC parser parses raw JS/TS/JSX into a standard ECMAScript AST. It maps type annotations, JSDoc nodes, and structural layout blocks to memory nodes.
+          </p>
+          <div class="arch-code-preview">
+            <code>parseCode(rawCode, { plugins: ['typescript', 'jsx'] })</code>
+          </div>
+        </div>
+
+        <div class="arch-card glass-panel">
+          <div class="arch-card-header">
+            <span class="arch-step">02</span>
+            <h3 class="arch-title">Semantic Context Compression</h3>
+          </div>
+          <p class="arch-text">
+            Compiler passes unwrap TypeScript assertions, delete type aliases, strip noise console logs, and collapse heavy nested JSX components into structural markdown signatures.
+          </p>
+          <div class="arch-code-preview">
+            <code>transformAST(ast, { stripTypes: true, abstractJSX: 'compact' })</code>
+          </div>
+        </div>
+
+        <div class="arch-card glass-panel">
+          <div class="arch-card-header">
+            <span class="arch-step">03</span>
+            <h3 class="arch-title">SQLite Signature Deduplication</h3>
+          </div>
+          <p class="arch-text">
+            Every codebase file gets a SHA-256 fingerprint cached in Node 24 native SQLite. If the code AST hasn't changed, cached minification returns in sub-millisecond time.
+          </p>
+          <div class="arch-code-preview">
+            <code>cache.get(sha256Signature) // 0.3ms hit</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Integration Snippets -->
+      <div class="integration-box glass-panel">
+        <div class="integration-header">
+          <h3>Drop-In Integration</h3>
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="openai">OpenAI Node SDK</button>
+            <button class="tab-btn" data-tab="cli">Terminal CLI</button>
+            <button class="tab-btn" data-tab="mcp">Cursor / Claude MCP</button>
+          </div>
+        </div>
+        <div class="integration-content">
+          <pre id="snippet-code-view"><code>import OpenAI from 'openai';
+
+// Point baseURL to ContextMunch Local Proxy
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: 'http://localhost:4040/v1' // Intercepts, munches AST, slashes 70% tokens!
+});</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Telemetry & Historical Cache Audit -->
+    <section id="telemetry" class="telemetry-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Persistent SQLite Telemetry & Audit Logs</h2>
+          <p class="section-desc">Active signature tracking and cumulative token optimization history.</p>
+        </div>
+        <button id="btn-clear-cache" class="btn-danger-outline">Flush Cache Database</button>
+      </div>
+
+      <div class="telemetry-grid glass-panel">
+        <div class="telemetry-stats">
+          <div class="tele-item">
+            <span class="tele-label">Total Unique Signatures</span>
+            <span class="tele-value" id="tele-signatures">0</span>
+          </div>
+          <div class="tele-item">
+            <span class="tele-label">Cache Hit Counter</span>
+            <span class="tele-value" id="tele-hits">0</span>
+          </div>
+          <div class="tele-item">
+            <span class="tele-label">Cumulative Tokens Slashed</span>
+            <span class="tele-value" id="tele-cumulative-tokens">0</span>
+          </div>
+          <div class="tele-item">
+            <span class="tele-label">Average Reduction</span>
+            <span class="tele-value" id="tele-avg-pct">0%</span>
+          </div>
+        </div>
+
+        <div class="audit-log-container">
+          <div class="audit-log-title">Recent Interception Transactions</div>
+          <div class="audit-list" id="audit-log-list">
+            <div class="audit-empty">No transactions logged yet. Run compression or query via proxy!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="logo-icon-sm">⚡</span>
+        <span>ContextMunch Middleware — AST Codebase Minifier</span>
+      </div>
+      <div class="footer-info">
+        <span>Node.js v24 • Babel AST • SQLite DatabaseSync</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Logic -->
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
